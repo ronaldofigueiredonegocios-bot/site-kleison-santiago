@@ -528,5 +528,25 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.m
   });
 </script>
 
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user && window.location.hash.includes("recovery_token")) {
+        window.netlifyIdentity.open("recovery");
+      }
+
+      if (!user && window.location.hash.includes("invite_token")) {
+        window.netlifyIdentity.open("signup");
+      }
+
+      window.netlifyIdentity.on("login", () => {
+        document.location.href = "/admin/";
+      });
+    });
+  }
+</script>
+
 </body>
 </html>
